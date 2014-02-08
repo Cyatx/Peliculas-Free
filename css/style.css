@@ -142,6 +142,9 @@ aside ol li:before {
     top:0;
     left:-16px;
 }
+aside ol li:first-child{
+    font-weight: bold;
+}
 aside h2{
     padding:0 20px 10px;
     margin:0 0 0;
@@ -160,7 +163,6 @@ aside li{
     margin:15px 0 8px 0;
     position:relative;
 }
-
 table{
     border-collapse:collapse;
     border-spacing:0;
@@ -176,6 +178,10 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section{
     display:block;
 }
+article h1{
+    font-size:1.5em;
+    margin:10px 0 5px;
+}
 blockquote, q{
     quotes:none;
 }
@@ -186,4 +192,88 @@ q:before, q:after {
 }
 :focus{
     outline:1px dotted #666;
+}
+.wrapper, #movies li section.main-info{
+    background-color:#f1f1f1;
+}
+#movies{
+    margin-right:200px;
+}
+#movies li{
+    position:relative;
+    overflow:hidden;
+    border-top:1px solid #fff;
+    border-bottom:1px solid #ccc;
+    background-color: #202125;
+    cursor:pointer;
+}
+#movies li img{
+    float:left;
+    margin-right:10px;
+}
+#movies li h3{
+    font-size:1.2em;
+    font-weight:bold;
+    padding:10px 0 3px 14px;
+}
+#movies li p{
+    padding:5px 14px;
+}
+#movies li .details{
+    color:#333;
+    font-size:.9em;
+}
+#movies li .actors{
+    color:#666;
+    font-size:.8em;
+}
+#movies li,#movies li section.main-info,
+#movies li section.description{
+    height:178px;
+}
+
+#movies li section.main-info{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    margin-left:120px;
+    padding: 5px 0;
+    transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -webkit-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    backface-visibility: hidden;
+    -webkit-backface-visibility:hidden;
+}
+
+#movies li:hover section.main-info{
+    transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    visibility:hidden;
+}
+
+#movies li section.description{
+    color:#f1f1f1;
+    font-size:0.9em;
+    line-height:1.4em;
+    height: 75%;
+    width: 75%;
+    margin-left:120px;
+    position: absolute;
+    padding: 5px;
+    visibility:hidden;
+    opacity:0;
+    transition:visibility 1s linear 1s,opacity 1s linear;
+    -webkit-transition: visibility 1s linear 1s,opacity 1s linear;
+    -o-transition: visibility 1s linear 1s,opacity 1s linear;
+}
+
+#movies li:hover section.description{
+    visibility:visible;
+    opacity:1;
+    transition-delay:0s;
+}
+#movies li:nth-of-type(odd) section.main-info{
+    background-color:#ccc;
 }
