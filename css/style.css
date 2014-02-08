@@ -76,6 +76,10 @@ nav a:hover{
     text-shadow: 2px 2px 1px #222;
     filter: dropshadow(color=#222222, offx=2, offy=2);
 }
+nav ul li{
+    display:inline;
+    margin-left: 10px;
+}
 header{
     color:#fff;
     height:122px;
@@ -180,7 +184,15 @@ footer, header, hgroup, menu, nav, section{
 }
 article h1{
     font-size:1.5em;
-    margin:10px 0 5px;
+    margin:15px 15px 15px 0;
+}
+article h2{
+    font-size: 1.3em;
+    margin: 15px;
+}
+article h3{
+    font-size: 1.1em;
+    margin: 15px;
 }
 blockquote, q{
     quotes:none;
@@ -215,6 +227,7 @@ q:before, q:after {
     font-size:1.2em;
     font-weight:bold;
     padding:10px 0 3px 14px;
+    margin: 0px;
 }
 #movies li p{
     padding:5px 14px;
@@ -245,7 +258,6 @@ q:before, q:after {
     backface-visibility: hidden;
     -webkit-backface-visibility:hidden;
 }
-
 #movies li:hover section.main-info{
     transform: rotateY(180deg);
     -ms-transform: rotateY(180deg);
@@ -268,7 +280,6 @@ q:before, q:after {
     -webkit-transition: visibility 1s linear 1s,opacity 1s linear;
     -o-transition: visibility 1s linear 1s,opacity 1s linear;
 }
-
 #movies li:hover section.description{
     visibility:visible;
     opacity:1;
@@ -276,4 +287,22 @@ q:before, q:after {
 }
 #movies li:nth-of-type(odd) section.main-info{
     background-color:#ccc;
+}
+.media-container{
+    height:100%;
+    width:100%;
+}
+.media-area-video{
+    overflow:hidden;
+    background-color:#000;
+}
+.media-area-audio{
+    background-color:#000;
+    padding-top: 10px;
+}
+.media{
+    background-color:#000;
+    outline:none;
+    height:100%;
+    width:100%;
 }
