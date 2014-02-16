@@ -12,7 +12,7 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure,
+article, aside, canvas, details, genre, figcaption, figure,
 footer, header, hgroup, menu, nav, section, summary,
 time, mark, audio, video{
     margin:0;
@@ -178,7 +178,7 @@ address,caption,cite,code,dfn,em,strong,th,var{
 ol, ul{
     list-style:none;
 }
-article, aside, details, figcaption, figure,
+article, aside, details, genre, figcaption, figure,
 footer, header, hgroup, menu, nav, section{
     display:block;
 }
@@ -232,7 +232,7 @@ q:before, q:after {
 #movies li p{
     padding:5px 14px;
 }
-#movies li .details{
+#movies li .details, .genre{
     color:#333;
     font-size:.9em;
 }
@@ -241,7 +241,7 @@ q:before, q:after {
     font-size:.8em;
 }
 #movies li,#movies li section.main-info,
-#movies li section.description{
+#movies li section.description, section.charting{
     height:178px;
 }
 
@@ -265,7 +265,7 @@ q:before, q:after {
     visibility:hidden;
 }
 
-#movies li section.description{
+#movies li section.description, section.charting{
     color:#f1f1f1;
     font-size:0.9em;
     line-height:1.4em;
@@ -281,6 +281,11 @@ q:before, q:after {
     -o-transition: visibility 1s linear 1s,opacity 1s linear;
 }
 #movies li:hover section.description{
+    visibility:visible;
+    opacity:1;
+    transition-delay:0s;
+}
+#movies li:hover section.charting{
     visibility:visible;
     opacity:1;
     transition-delay:0s;
@@ -305,4 +310,94 @@ q:before, q:after {
     outline:none;
     height:100%;
     width:100%;
+}
+.contact_form h2 {
+    background: none repeat scroll 0 0 #F3F3F3;
+    border-radius: 5px;
+    display: block;
+    padding: 5px;
+    text-shadow: 1px 1px 1px #CCCCCC;
+    margin:0px;
+    width: 75%;
+}
+.contact_form ul {
+    width: 75%;
+    list-style-type:none;
+    margin:0px;
+    padding:0px;
+}
+.contact_form li{
+    padding:12px;
+    border-bottom:1px solid #eee;
+    position:relative;
+}
+.contact_form label {
+    color: #555555;
+    display: inline-block;
+    float: left;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 3px;
+    padding: 3px;
+    width: 90px;
+}
+.contact_form input {
+    height:20px;
+    width:220px;
+    padding:5px 8px;
+}
+.contact_form textarea {
+    padding:8px;
+    width:300px;
+}
+.contact_form button {
+    margin-left:90px;
+}
+.contact_form input, .contact_form textarea {
+    border:1px solid #aaa;
+    box-shadow: 0px 0px 3px #ccc, 0 10px 15px #eee inset;
+    border-radius:2px;
+    color: #888;
+    font-size: 12px;
+    padding-right:30px;
+    -moz-transition: padding .25s;
+    -webkit-transition: padding .25s;
+    -o-transition: padding .25s;
+    transition: padding .25s;
+}
+.contact_form input:focus, .contact_form textarea:focus {
+    background: #fff;
+    border:1px solid #555;
+    box-shadow: 0 0 3px #aaa;
+    padding-right:80px;
+}
+.contact_form input:required:valid, .contact_form textarea:required:valid {
+    box-shadow: 0 0 5px #5cd053;
+    border-color: green;
+}
+.contact_form input:focus:invalid, .contact_form textarea:focus:invalid {
+    box-shadow: 0 0 5px #d45252;
+    border-color: red;
+}
+button.submit {
+    padding: 9px 17px;
+    font-weight: bold;
+    line-height: 1;
+    color: #444;
+    border: none;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85);
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#bbb));
+    background-image: -moz-linear-gradient(0% 100% 90deg, #BBBBBB, #FFFFFF);
+    background-color: #fff;
+    border: 1px solid #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+button.submit:hover {
+    opacity:.55;
+    cursor: pointer;
+}
+button.submit:active {
+    border: 1px solid #222;
+    box-shadow: 0 0 10px 5px #444 inset;
 }
