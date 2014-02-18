@@ -3,7 +3,7 @@
     <head>
         <title>Peliculas Now! - Encuentre los cines mas cercanos</title>
         <meta charset="utf-8" />
-        <meta name="description" content="Contacta con nosotros" />
+        <meta name="description" content="Los mejores cines en España" />
         <meta name="author" content="Jorge Bailo" />
         <meta name="keywords" content="peliculas, entradas, cines, cartelera, estrenos, taquillazos, trailers, analisis, comentarios" />
         <link rel="stylesheet" href="css/style.css" type="text/css" />
@@ -125,7 +125,7 @@
                         }  
                      }
                 }
-
+                
                 try {
                     for (var i = 0; i < cines.length; i++) {
                         var name = cines[i].name;
@@ -151,9 +151,18 @@
                 var status = document.getElementById('status');
                 status.innerHTML = msg;
             }
+            
+            function handle_errors(errorobj){
+                switch(errorobj.code){
+                    case errorobj.PERMISSION_DENIED: error("Usted no ha compartido su ubicación");break;
+                    case errorobj.POSITION_UNAVAILABLE: error("No es posible detectar su ubicación"); break;
+                    case errorobj.TIMEOUT: error("Tiempo de espera excedido para detectar su ubicación"); break;
+                    default: error("Error al detectar su ubicación"); break;
+                }
+            }
 
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(success, error, {maximumAge: 60000, timeout: 4000});
+                navigator.geolocation.getCurrentPosition(success, handle_errors, {maximumAge: 60000, timeout: 4000});
             } else {
                 error('Su navegador no tiene soporte para su geolocalización');
             }
