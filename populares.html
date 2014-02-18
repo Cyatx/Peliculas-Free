@@ -8,10 +8,10 @@
         <meta name="keywords" content="peliculas, entradas, cines, cartelera, estrenos, taquillazos, trailers, analisis, comentarios" />
         <link rel="stylesheet" href="css/style.css" type="text/css" />
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <!--[if lt IE 9]>
-        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        <script src="js/modernizr.js"></script>
+        <script src="js/js-webshim/minified/polyfiller.js"></script>
         <script>
+            $.webshims.polyfill();
             $(document).ready(function() {
                 $('canvas').each(function() {
                     var values = $(this).attr("data-feed").split(",");
@@ -62,6 +62,7 @@
                         <li><a title="Volver al Inicio" href="index.html">Inicio</a></li>
                         <li><a title="Trailers" href="trailers.html">Trailers</a></li>
                         <li><a title="Populares" href="populares.html">Populares</a></li>
+                        <li><a title="Cines" href="cines.html">Cines</a></li>
                         <li><a title="Contacto" href="contacto.html">Contacto</a></li>
                     </ul>
                 </nav>

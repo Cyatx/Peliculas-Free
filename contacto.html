@@ -12,6 +12,25 @@
         <script src="js/js-webshim/minified/polyfiller.js"></script>
         <script>
 	$.webshims.polyfill();
+        $(document).ready(function() {
+            function report(valid){
+               if (valid){
+                   $('#message').addClass("valid");
+                   $('#message').text("Su mensaje ha sido correctamente enviado");
+               } else {
+                   $('#message').addClass("invalid");
+                   $('#message').text("Rellene los datos correctamente");
+               }
+            };   
+            $('#contacto').submit(function(event){
+                event.preventDefault();
+                if ($('#contacto').checkValidity()){
+                    report(true);
+                } else {
+                    report(false);
+                }
+            });
+        });
         </script>
     </head>
     <body>
@@ -23,6 +42,7 @@
                         <li><a title="Volver al Inicio" href="index.html">Inicio</a></li>
                         <li><a title="Trailers" href="trailers.html">Trailers</a></li>
                         <li><a title="Populares" href="populares.html">Populares</a></li>
+                        <li><a title="Cines" href="cines.html">Cines</a></li>
                         <li><a title="Contacto" href="contacto.html">Contacto</a></li>
                     </ul>
                 </nav>
@@ -53,29 +73,32 @@
                 </aside>
                 <section>
                     <article>
-                        <form class="contact_form" action="#" method="post">
+                        <form id="contacto" name="contacto" class="contact_form" action="#" method="post">
                             <ul>
                                 <li>
-                                    <h2>Contáctanos</h2>
+                                    <h2>Contacta con nosotros</h2>
+                                </li>
+                                <li>
+                                    <span id="message"></span>
                                 </li>
                                 <li>
                                     <label for="name">Nombre:</label>
-                                    <input type="text"  placeholder="Tu Nombre" required />
+                                    <input type="text" name="name" id="name" placeholder="Tu Nombre" required />
                                 </li>
                                 <li>
                                     <label for="email">Email:</label>
-                                    <input type="email" name="email" placeholder="Tu Email" required />
+                                    <input type="email" name="email" id="email" placeholder="Tu Email" required />
                                 </li>
                                 <li>
                                     <label for="website">Sitio Web:</label>
-                                    <input type="url" name="web" placeholder="Tu Sitio Web" required />
+                                    <input type="url" name="website" id="website" placeholder="Tu Sitio Web" required />
                                 </li>
                                 <li>
-                                    <label for="Mensaje">Mensaje:</label>
-                                    <textarea name="Mensaje" cols="40" rows="6" required ></textarea>
+                                    <label for="mensaje">Mensaje:</label>
+                                    <textarea name="Mensaje" id="mensaje" cols="40" rows="6" required ></textarea>
                                 </li>
                                 <li>
-                                    <button class="submit" type="submit">Enviar</button>
+                                    <button class="submit" id="submit" type="submit">Enviar</button>
                                 </li>
                             </ul>
                         </form>
