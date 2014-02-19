@@ -1,18 +1,17 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html> 
+<html>
     <head>
-        <title>Peliculas Now! - Encuentre los cines mas cercanos</title>
-        <meta charset="utf-8" />
-        <meta name="description" content="Los mejores cines en España" />
-        <meta name="author" content="Jorge Bailo" />
-        <meta name="keywords" content="peliculas, entradas, cines, cartelera, estrenos, taquillazos, trailers, analisis, comentarios" />
-        <link rel="stylesheet" href="css/style.css" type="text/css" />
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="js/modernizr.js"></script>
-        <script src="js/js-webshim/minified/polyfiller.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <title>PeliculasNow!</title>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
         <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+        <style>
+            #cines, #map { height:100%; width: 100%; padding: 0;}
+        </style>
         <script>
-            $.webshims.polyfill();
             var cines = [];
             function importXML(xmlfile) {
                 var xmlDoc;
@@ -61,13 +60,6 @@
                 var status = document.querySelector('#status');
                 status.innerHTML = "Consulte sus cines mas cercanos";
 
-                var mapcanvas = document.createElement('div');
-                mapcanvas.id = 'mapcanvas';
-                mapcanvas.style.height = '400px';
-                mapcanvas.style.width = '560px';
-
-                document.querySelector('#map').appendChild(mapcanvas);
-
                 var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                 var myOptions = {
                     zoom: 15,
@@ -76,7 +68,7 @@
                     navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
-                var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
+                var map = new google.maps.Map(document.getElementById("map"), myOptions);
                 var infoWindow = new google.maps.InfoWindow;
                 var marker = new google.maps.Marker({
                     position: latlng,
@@ -88,7 +80,7 @@
                         cines = JSON.parse(sessionStorage.getItem("xmlDoc"));
                     } else {
                         try {
-                            xmlDoc = importXML("xml/cines.xml");
+                            xmlDoc = importXML("../xml/cines.xml");
                             var markers = xmlDoc.documentElement.getElementsByTagName("marker");
                             for (var i = 0; i < markers.length; i++) {
                                 try {
@@ -99,14 +91,14 @@
                                     cineObject.lng = parseFloat(markers[i].getAttribute("lng"));
                                     cineObject.html = "<b>" + cineObject.name + "</b><br/>" + cineObject.address;
                                     cines.push(cineObject);
-                                }catch (e) {
+                                } catch (e) {
                                     error("Se produjo un error en la carga de los datos");
-                                }  
-                             }
-                             sessionStorage.setItem("xmlDoc", JSON.stringify(cines));
-                        }catch (e) {
+                                }
+                            }
+                            sessionStorage.setItem("xmlDoc", JSON.stringify(cines));
+                        } catch (e) {
                             error("Se produjo un error en la carga de los datos");
-                        }  
+                        }
                     }
                 } else {
                     xmlDoc = importXML("xml/cines.xml");
@@ -118,14 +110,14 @@
                             cineObject.address = markers[i].getAttribute("address");
                             cineObject.lat = parseFloat(markers[i].getAttribute("lat"));
                             cineObject.lng = parseFloat(markers[i].getAttribute("lng")),
-                            cineObject.html = "<b>" + cineObject.name + "</b><br/>" + cineObject.address;
+                                    cineObject.html = "<b>" + cineObject.name + "</b><br/>" + cineObject.address;
                             cines.push(cineObject);
-                        }catch (e) {
+                        } catch (e) {
                             error("Se produjo un error en la carga de los datos");
-                        }  
-                     }
+                        }
+                    }
                 }
-                
+
                 try {
                     for (var i = 0; i < cines.length; i++) {
                         var name = cines[i].name;
@@ -151,13 +143,21 @@
                 var status = document.getElementById('status');
                 status.innerHTML = msg;
             }
-            
-            function handle_errors(errorobj){
-                switch(errorobj.code){
-                    case errorobj.PERMISSION_DENIED: error("Usted no ha compartido su ubicación");break;
-                    case errorobj.POSITION_UNAVAILABLE: error("No es posible detectar su ubicación"); break;
-                    case errorobj.TIMEOUT: error("Tiempo de espera excedido para detectar su ubicación"); break;
-                    default: error("Error al detectar su ubicación"); break;
+
+            function handle_errors(errorobj) {
+                switch (errorobj.code) {
+                    case errorobj.PERMISSION_DENIED:
+                        error("Usted no ha compartido su ubicación");
+                        break;
+                    case errorobj.POSITION_UNAVAILABLE:
+                        error("No es posible detectar su ubicación");
+                        break;
+                    case errorobj.TIMEOUT:
+                        error("Tiempo de espera excedido para detectar su ubicación");
+                        break;
+                    default:
+                        error("Error al detectar su ubicación");
+                        break;
                 }
             }
 
@@ -167,56 +167,35 @@
                 error('Su navegador no tiene soporte para su geolocalización');
             }
         </script>
-    </head>
-    <body>
-        <section class="wrapper">
-            <div class="main">
-                <header>
-                    <h1>PeliculasNow! - Los mejores estrenos de cine</h1>
-                </header>
-                <nav>
+        <style>
+            .ui-header .ui-title, .ui-footer .ui-title {
+                margin-right: 0 !important; margin-left: 0 !important;
+            }
+        </style>
+    </head> 
+    <body> 
+        <div data-role="page" id="cines" data-title="PeliculasNow! - Cines">
+            <div data-role="header" data-position="fixed" data-id="nav_header">
+                <h1 id="status">Cines más cercanos</h1>
+                <div data-role="navbar">
                     <ul>
-                        <li><a title="Volver al Inicio" href="index.html">Inicio</a></li>
-                        <li><a title="Trailers" href="trailers.html">Trailers</a></li>
-                        <li><a title="Populares" href="populares.html">Populares</a></li>
-                        <li><a title="Cines" href="cines.html">Cines</a></li>
-                        <li><a title="Contacto" href="contacto.html">Contacto</a></li>
+                        <li><a href="index.html" rel="external">Estrenos</a></li>
+                        <li><a href="cines.html" class="ui-btn-active ui-btn-active ui-state-persist" rel="external">Cines</a></li>
+                        <li><a href="trailers.html" data-transition="slide" rel="external">Trailers</a></li>
                     </ul>
-                </nav>
-                <aside>
-                    <h2>Top Taquillazos:</h2>
-                    <ol>
-                        <li itemscope itemtype="http://schema.org/Movie">
-                            <h3 itemprop="name">Dark Knight Rises</h3>
-                            <p itemprop="genre">Acción</p>
-                        </li>
-                        <li itemscope itemtype="http://schema.org/Movie">
-                            <h3 itemprop="name">Avengers</h3>
-                            <p itemprop="genre">Acción</p>
-                        </li>
-                        <li itemscope itemtype="http://schema.org/Movie">
-                            <h3 itemprop="name">Ice Age: Continental Drift</h3>
-                            <p itemprop="genre">Animación</p>
-                        </li>
-                        <li itemscope itemtype="http://schema.org/Movie">
-                            <h3 itemprop="name">The Amazing Spider-Man</h3>
-                            <p itemprop="genre">Acción</p>
-                        </li>
-                        <li itemscope itemtype="http://schema.org/Movie">
-                            <h3 itemprop="name">Dark Shadows</h3>
-                            <p itemprop="genre">Comedia</p>
-                        </li>
-                    </ol>
-                </aside>
-                <section>
-                    <article>
-                        <h1 id="status">Buscando su localización...</h1>  
-                        <div id="map"></div>
-                    </article>
-                </section>
+                </div>
             </div>
-            <div class="push"></div>
-        </section>
-        <footer>Copyright &copy; 2014 PeliculasNow. All rights reserved.</footer>
+            <div data-role="content" id="map">
+            </div>
+            <div data-role="footer" data-position="fixed" data-id="nav_footer">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="about.html" data-rel="dialog" data-transition="pop">About</a>
+                        <li><a href="contacto.html">Contacto</a>    
+                    </ul>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
+
